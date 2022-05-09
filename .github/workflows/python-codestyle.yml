@@ -6,18 +6,18 @@ on:
   pull_request:
     branches: [ci_codestyle_runner]
 
-env:
-  NODE_TLS_REJECT_UNAUTHORIZED: 0
+envs:
 #  SSL_CERT_DIR: /etc/ssl/certs
+  NODE_TLS_REJECT_UNAUTHORIZED: 0
 
 jobs:
   build:
     runs-on: [self-hosted, Windows]
     strategy:
       # For debbug purposes
-      # fail-fast: false
+      fail-fast: false
       matrix:
-        python-version: ["3.10.3"]
+        python-version: ["3.10.3", "3.9"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
