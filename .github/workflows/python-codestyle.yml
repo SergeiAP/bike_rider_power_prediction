@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ci_codestyle_runner]
 
-envs:
+env:
 #  SSL_CERT_DIR: /etc/ssl/certs
   NODE_TLS_REJECT_UNAUTHORIZED: 0
 
