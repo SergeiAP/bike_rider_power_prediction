@@ -7,11 +7,12 @@ on:
     branches: [ci_codestyle_runner]
 
 env:
-  SSL_CERT_DIR: /etc/ssl/certs
+  NODE_TLS_REJECT_UNAUTHORIZED: 0
+#  SSL_CERT_DIR: /etc/ssl/certs
 
 jobs:
   build:
-    runs-on: [self-hosted, docker]
+    runs-on: [self-hosted, Windows]
     strategy:
       # For debbug purposes
       # fail-fast: false
