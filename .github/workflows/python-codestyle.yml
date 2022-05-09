@@ -7,12 +7,12 @@ on:
     branches: [ci_codestyle_runner]
 
 env:
-#  SSL_CERT_DIR: /etc/ssl/certs
-  NODE_TLS_REJECT_UNAUTHORIZED: 0
+  SSL_CERT_DIR: /etc/ssl/certs
+  # NODE_TLS_REJECT_UNAUTHORIZED: 0
 
 jobs:
   build:
-    runs-on: [self-hosted, Windows]
+    runs-on: [self-hosted, docker]
     strategy:
       # For debbug purposes
       fail-fast: false
@@ -24,6 +24,26 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install -- upgrade pip
+        pip install mypy pylint flake8 pytest
+    # - name: "Check type hints by mypy"
+      # run: |
+      #   mypy --ignore-missing-imports .gitignore
+      #   flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    # - name: Analysing the code with pylint
+    #   run: |
+    #     pylint $(git ls-files '*.py')
+
+# steps:
+# - uses: actions/checkout@v3
+# - name: Install poetry
+#   run: pipx install poetry
+# - uses: actions/setup-python@v3
+#   with:
+#     python-version: '3.9'
+#     cache: 'poetry'
+# - run: poetry install
+# - run: poetry run pytest
