@@ -7,6 +7,7 @@ on:
     branches: [ci_codestyle_runner]
 
 env:
+#  SSL_CERT_DIR: /etc/ssl/certs
   SSL_CERT_DIR: /etc/ssl/certs
   SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
   DOCKER_TLS_VERIFY: 0
@@ -16,7 +17,7 @@ env:
 
 jobs:
   build:
-    runs-on: [self-hosted, Linux]
+    runs-on: [self-hosted, Windows]
     strategy:
       # For debbug purposes
       fail-fast: false
@@ -28,9 +29,9 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-        cache: 'pip'
     - name: Install dependencies
       run: |
+        python --version
         python -m pip install -- upgrade pip
         pip install mypy pylint flake8 pytest
     # - name: "Check type hints by mypy"
