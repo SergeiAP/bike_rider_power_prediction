@@ -7,12 +7,11 @@ on:
     branches: [ci_codestyle_runner]
 
 env:
-#  SSL_CERT_DIR: /etc/ssl/certs
-  SSL_CERT_DIR: /etc/ssl/certs
-  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
-  DOCKER_TLS_VERIFY: 0
-  SSL_NO_VERIFY: 0
-  PYTHONHTTPSVERIFY: 0
+  # SSL_CERT_DIR: /etc/ssl/certs
+  # SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+  # DOCKER_TLS_VERIFY: 0
+  # SSL_NO_VERIFY: 0
+  # PYTHONHTTPSVERIFY: 0
   NODE_TLS_REJECT_UNAUTHORIZED: 0
 
 jobs:
@@ -29,9 +28,9 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
-        python --version
         python -m pip install -- upgrade pip
         pip install mypy pylint flake8 pytest
     # - name: "Check type hints by mypy"
